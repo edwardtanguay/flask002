@@ -1,10 +1,11 @@
 from flask import Flask, render_template
+import tools as t
 
 app = Flask(__name__)
 
 @app.route('/')
 def welcome():
-	return render_template('welcome.html')
+	return render_template('welcome.html', currentTime = t.getCurrentDateTimeIso())
 
 @app.route('/info')
 def info():
