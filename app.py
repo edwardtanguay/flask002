@@ -7,9 +7,9 @@ app = Flask(__name__)
 def welcome():
 	return render_template('welcome.html', currentTime = t.getCurrentDateTimeIso())
 
-@app.route('/info')
+@app.route('/url')
 def info():
-	return '<h2>Flask002</h2><p>This is the info page.</p>'
+	return render_template('url.html')
 
 port = 3737
 print(f'DEV SITE: http://localhost:{port}')
