@@ -1,0 +1,15 @@
+{
+  "name": "flask002",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "python app.py",
+    "start": "python3 app.py",
+    "setup": "npm i && pm2 start --name flask002-tanguay-eu npm -- start --update-env --time && pm2 save",
+    "deploy": "git pull --no-rebase && pm2 restart flask002-tanguay-eu --update-env --time && pm2 save"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
