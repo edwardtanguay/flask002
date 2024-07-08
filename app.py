@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, flash, render_template, request, redirect, url_for
 import json
 import tools as t
 import os.path
 
 app = Flask(__name__)
+app.secret_key = "ksjdfwief834sjdf"
 
 @app.route('/home')
 def welcome():
@@ -26,6 +27,7 @@ def show_url():
 				urls = json.load(urls_file)
 
 		if code in urls.keys():
+			flash(f"The key {code} already exists. Please choose another.")
 			return redirect(url_for('welcome'))
 
 		urls[code] = {'url': url}

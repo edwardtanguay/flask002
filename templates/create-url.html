@@ -8,6 +8,9 @@
 <body>
 	<h1>Flask002</h1>
 	<h2>URL Shortener</h2>
+	{% for message in get_flashed_messages() %}
+	<h3>{{ message }}</h3>
+	{% endfor %}
 	<hr/>
 	<form action="show-url" method="post">
 		<label for="url">Website URL</label>
