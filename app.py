@@ -6,7 +6,7 @@ import os.path
 app = Flask(__name__)
 app.secret_key = "ksjdfwief834sjdf"
 
-@app.route('/home')
+@app.route('/')
 def welcome():
 	return render_template('welcome.html', currentTime = t.getCurrentDateTimeIso())
 
@@ -28,11 +28,11 @@ def show_url():
 
 		if code in urls.keys():
 			flash(f"The key {code} already exists. Please choose another.")
-			return redirect(url_for('welcome'))
+			return redirect(url_for('create_url'))
 
 		urls[code] = {'url': url}
 		with open(pathAndFileName, 'w') as url_file:
-			json.dump(urls, url_file)
+			json.dump(urls, url_file, indent=4)
 		return render_template('show-url.html', code=code)
 	else:
 		return redirect(url_for('welcome'))
