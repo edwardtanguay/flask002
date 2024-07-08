@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
 import tools as t
+import os.path
 
 app = Flask(__name__)
 
@@ -15,11 +16,22 @@ def create_url():
 @app.route('/show-url', methods=['GET', 'POST'])
 def show_url():
 	if request.method == 'POST':
+		pathAndFileName = 'data/urls.json'
+		code = request.form['code']
+		url = request.form['url']
 		urls = {}
-		urls[request.form['code']] = {'url': request.form['url']}
-		with open('data/urls.json', 'w') as url_file:
+
+		if os.path.exists(pathAndFileName):
+			with open(pathAndFileName) as urls_file:
+				urls = json.load(urls_file)
+
+		if code in urls.keys():
+			return redirect(url_for('welcome'))
+
+		urls[code] = {'url': url}
+		with open(pathAndFileName, 'w') as url_file:
 			json.dump(urls, url_file)
-		return render_template('show-url.html', code=request.form['code'])
+		return render_template('show-url.html', code=code)
 	else:
 		return redirect(url_for('welcome'))
 

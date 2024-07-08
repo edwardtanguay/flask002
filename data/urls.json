@@ -1,1 +1,8 @@
-{"goog": {"url": "http://new.com"}}
+{
+	"goog": {
+		"url": "http://new.com"
+	},
+	"new": {
+		"url": "http://newer.com"
+	}
+}
