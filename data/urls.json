@@ -13,5 +13,17 @@
     },
     "five": {
         "url": "http://five.com"
+    },
+    "emp": {
+        "file": "empemployee_4.jpg"
+    },
+    "micro": {
+        "url": "http://microsoft.com"
+    },
+    "micro2": {
+        "url": "http://microsoft.com"
+    },
+    "Susanne": {
+        "file": "Susanneemployee_8.jpg"
     }
 }

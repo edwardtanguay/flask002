@@ -11,6 +11,17 @@ app.secret_key = "ksjdfwief834sjdf"
 def welcome():
 	return render_template('welcome.html', currentTime = t.getCurrentDateTimeIso())
 
+
+@app.route('/info')
+def info():
+	emp = {
+		"firstName": "Sangee",
+		"age": 34
+	}
+	colors = ["red", "blue"]
+	return render_template('info.html', emp = emp, colors = colors)
+
+
 @app.route('/create-url')
 def create_url():
 	return render_template('create-url.html')
@@ -20,7 +31,6 @@ def show_url():
 	if request.method == 'POST':
 		pathAndFileName = 'data/urls.json'
 		code = request.form['code']
-		url = request.form['url']
 		urls = {}
 
 		if os.path.exists(pathAndFileName):
@@ -32,6 +42,7 @@ def show_url():
 			return redirect(url_for('create_url'))
 
 		if 'url' in request.form.keys():
+			url = request.form['url']
 			urls[code] = {'url': url}
 		else:
 			f = request.files['file']
