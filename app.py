@@ -2,6 +2,7 @@ from flask import Flask, flash, render_template, request, redirect, url_for
 import json
 import tools as t
 import os.path
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "ksjdfwief834sjdf"
@@ -30,7 +31,15 @@ def show_url():
 			flash(f"The key {code} already exists. Please choose another.")
 			return redirect(url_for('create_url'))
 
-		urls[code] = {'url': url}
+		if 'url' in request.form.keys():
+			urls[code] = {'url': url}
+		else:
+			f = request.files['file']
+			uploadPathAndFileName = code + secure_filename(f.filename)
+			f.save(uploadPathAndFileName)
+			urls[code] = {'file': uploadPathAndFileName}
+
+
 		with open(pathAndFileName, 'w') as url_file:
 			json.dump(urls, url_file, indent=4)
 		return render_template('show-url.html', code=code)
